@@ -71,10 +71,5 @@ https://github.com/user-attachments/assets/baa9c8f2-762c-4776-ab1e-25190252ada6
 
 ---
 
-## 5.迭代日志
 
-| 时间 | 达成 MVP 阶段 | 备注 |
-| :--- | :--- | :--- |
-| 2026-09-15 | MVP 1.0 | 完成核心通路 |
-
-> 公开链接：（待补充）
+> 公开链接：(https://da-12-da.github.io/-/)
