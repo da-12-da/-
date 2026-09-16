@@ -1,0 +1,10 @@
+{
+  "name": "jzmd",
+  "main": "jzmd-worker.js",
+  "compatibility_date": "2026-09-16",
+  "workers_dev": true,
+  "keep_vars": true,
+  "vars": {
+    "ALLOWED_ORIGINS": "https://da-12-da.github.io,http://127.0.0.1:5173,http://localhost:5173"
+  }
+}

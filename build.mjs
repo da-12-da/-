@@ -6,7 +6,7 @@ const deployment=deploymentConfig();
 const dist=new URL('./dist/',import.meta.url),assets=['index.html','app.js','core.js','style.css','favicon.svg','success.wav'];
 await mkdir(new URL('api/',dist),{recursive:true});
 // Only allow public assets. Never package server code, credentials, or test fixtures.
-const expected=new Set([...assets,'_headers','api/config']);
+const expected=new Set([...assets,'_headers','api/config','config.json','.nojekyll']);
 for(const entry of await readdir(dist,{recursive:true,withFileTypes:true})){
  if(!entry.isFile())continue;
  const name=relative(fileURLToPath(dist),join(entry.parentPath,entry.name)).replaceAll('\\','/');
@@ -14,6 +14,8 @@ for(const entry of await readdir(dist,{recursive:true,withFileTypes:true})){
 }
 for(const name of assets)await copyFile(new URL(`./public/${name}`,import.meta.url),new URL(name,dist));
 await writeFile(new URL('api/config',dist),JSON.stringify(deployment)+'\n');
+await writeFile(new URL('config.json',dist),JSON.stringify(deployment)+'\n');
+await writeFile(new URL('.nojekyll',dist),'');
 await writeFile(new URL('_headers',dist),`/*
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer

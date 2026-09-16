@@ -1,6 +1,6 @@
 # 就这么定
 
-最新百度地图集成请以 [百度地图接入部署.md](百度地图接入部署.md) 为准。Worker 完整代码为 worker/jzmd-worker.js，公开地址在 deployment.json 配置。Pages 仅托管前端，百度 AK 仅配置到 JZMD Worker Secret。当前缺少实际 Worker URL，尚未完成真实账号联调。
+当前部署请以 [GitHub-Pages部署.md](GitHub-Pages部署.md) 为准：前端通过 GitHub Actions 发布到 GitHub Pages，百度接口由现有 JZMD Cloudflare Worker 代理。公开 Worker 地址已配置在 deployment.json；百度 AK 只保存在 Worker Secret，真实接口可用性需单独联调。
 
 移动端优先的单机聚餐决策 Web App。沿用提供的「参考图定制-轻甜紫.html」最终界面：亮紫立体按钮、粉彩转盘、深紫 GO、浅绿独立结果卡。正式界面没有原型总览、状态切换器、编辑器、头像、模拟状态栏或底部黑条。
 

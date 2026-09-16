@@ -1,3 +1,5 @@
+当前改用 GitHub Pages 自动发布，参见 [GitHub-Pages部署.md](GitHub-Pages部署.md)。下方内容仅为历史部署记录。
+
 # Cloudflare Pages 静态部署
 
 以下保留早期纯静态部署记录。最新版本已实现独立的百度 JZMD Worker 与前端地址配置，当前操作请以 [百度地图接入部署.md](百度地图接入部署.md) 为准；不再需要自行编写适配层。真实 Worker 地址和线上联调仍待补齐。
