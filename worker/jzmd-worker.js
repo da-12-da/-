@@ -15,9 +15,9 @@ export function parseSearch(url){let location;try{location=JSON.parse(url.search
  throw new ApiError(400,'INVALID_LOCATION','请选择有效的城市、区域或当前位置。');
 }
 async function amap(path,params,env,fetcher,signal){
- const url=new URL(path,'https://restapi.amap.com');url.search=new URLSearchParams({...params,output:'json',key:env.AMAP_KEY});
- let data;try{const response=await fetcher(url.href,{signal,redirect:'error'});if(!response.ok)throw Error('upstream');const body=await response.text();if(body.length>2000000)throw Error('size');data=JSON.parse(body);}catch{throw new ApiError(502,'AMAP_UNAVAILABLE','地图服务暂时不可用，请稍后重试。');}
- if(String(data.status)!=='1'){const quota=[10003,10004,10019,10020,10021,10029,10044].includes(Number(data.infocode));throw new ApiError(quota?429:502,quota?'AMAP_QUOTA':'AMAP_REJECTED',quota?'地图查询额度暂时用尽，请稍后重试。':'地图服务未能完成查询，请检查服务权限或稍后重试。');}
+ const url=new URL(path,'https://restapi.amap.com');url.search=new URLSearchParams({...params,output:'JSON',key:env.AMAP_KEY});
+ let data;try{const response=await fetcher(url.href,{signal,redirect:'manual'});if(!response.ok)throw Error('upstream');const body=await response.text();if(body.length>2000000)throw Error('size');data=JSON.parse(body);}catch{throw new ApiError(502,'AMAP_UNAVAILABLE','地图服务暂时不可用，请稍后重试。');}
+ if(String(data.status)!=='1'){const quota=[10003,10004,10019,10020,10021,10029,10044].includes(Number(data.infocode));throw new ApiError(quota?429:502,quota?'AMAP_QUOTA':(/^\d{5}$/.test(String(data.infocode))?'AMAP_REJECTED_'+data.infocode:'AMAP_REJECTED'),quota?'地图查询额度暂时用尽，请稍后重试。':'地图服务未能完成查询，请检查服务权限或稍后重试。');}
  return data;
 }
 function point(value){if(typeof value!=='string'||!/^[-\d.]+,[-\d.]+$/.test(value))return null;const [lng,lat]=value.split(',').map(Number);return coord({lng,lat})?{lng,lat}:null;}
